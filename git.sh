@@ -4,7 +4,7 @@ set +x
 
 GIT_BRANCH=`git branch|awk -F ' ' '{print $2}'`
 
-echo "The commit branch this time is: ${GIT_BRANCH}"
+echo "-----------------The commit branch this time is: ${GIT_BRANCH}-----------------"
 
 git add .
 
@@ -16,5 +16,5 @@ if [ $? -ne 0 ];then
     echo "git push failed! Pls check!"
 else
     GIT_COMMIT=`git reflog |head -1|awk -F ' ' '{print $1}'`
-    echo "The commit id: ${GIT_COMMIT}"
+    echo "-----------------The commit id: ${GIT_COMMIT}-----------------"
 fi
