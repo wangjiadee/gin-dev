@@ -28,12 +28,13 @@ func main() {
 			}
 		})
 		v1.GET("/topic/:topic_id", dao.GetTopicDetail)
+		// v1.GET("", dao.GetTopicList)
 		v1.Use(dao.MustLogin())
 		{
 			v1.POST("", dao.NewTopic)
 			v1.DELETE("/topic/:topic_id", dao.DelTopic)
 		}
 
-		router.Run()
+		router.Run(":8089")
 	}
 }
