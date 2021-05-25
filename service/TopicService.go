@@ -3,12 +3,20 @@ package service
 // golang 内置验证器
 // github_docs: https://pkg.go.dev/github.com/go-playground/validator/v10
 //
+
 type Topic struct {
-	TopicID         int    `json:"id"`
-	TopicTitle      string `json:"title" binding:"min=4,max=20"`
-	TopicShortTitle string `json:"stitle" binding:"required,nefield=TopicTitle"`
-	UserIP          string `json:"ip" binding:"ipv4"`
-	TopicScore      int    `json:"score" binding:"omitempty,gt=5"`
+	TopicID         int    `form:"id" json:"id"`
+	TopicTitle      string `form:"title" json:"title" binding:"min=4,max=20"`
+	TopicShortTitle string `form:"stitle" json:"stitle" binding:"required,nefield=TopicTitle"`
+	UserIP          string `form:"ip" json:"ip" binding:"ipv4"`
+	TopicScore      int    `form:"score" json:"score" binding:"omitempty,gt=5"`
+	TopicUrl        string `form:"url" json:"url" binding:"omitempty,abc"` //绑定自定义的topicurl验证器
+
+}
+
+type Topics struct {
+	TopicList     []Topic `json:"topics" binding:"gt=0,lt=3"`
+	TopicListSize int     `json:"size"`
 }
 
 type TopicQuery struct {
@@ -18,6 +26,6 @@ type TopicQuery struct {
 }
 
 // CreateTopic: Temporary creation of entity function
-func CreateTopic(id int, title string, stitle string, ip string, score int) Topic {
-	return Topic{id, title, stitle, ip, score}
-}
+// func CreateTopic(id int, title string, stitle string, ip string, score int) Topic {
+// 	return Topic{id, title, stitle, ip, score}
+// }

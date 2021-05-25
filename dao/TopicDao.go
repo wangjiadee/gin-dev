@@ -19,10 +19,10 @@ func MustLogin() gin.HandlerFunc {
 }
 
 //GetTopicDetail: Past corresponding posts by id
-func GetTopicDetail(c *gin.Context) {
-	// c.String(http.StatusOK, "获取到的ID为%s", c.Param("topic_id"))
-	c.JSON(http.StatusOK, service.CreateTopic(2019, "帖子标题", "sdds", "172.0.0.1", 7))
-}
+// func GetTopicDetail(c *gin.Context) {
+// 	// c.String(http.StatusOK, "获取到的ID为%s", c.Param("topic_id"))
+// 	c.JSON(http.StatusOK, service.CreateTopic(2019, "帖子标题", "sdds", "172.0.0.1", 7))
+// }
 
 func NewTopic(c *gin.Context) {
 	topic := service.Topic{}
@@ -34,6 +34,18 @@ func NewTopic(c *gin.Context) {
 	}
 	// c.String(http.StatusOK, "新增帖子成功!")
 }
+
+func NewTopics(c *gin.Context) {
+	topic := service.Topics{}
+	err := c.BindJSON(&topic)
+	if err != nil {
+		c.String(400, "[ERROR:] Parameter error", err.Error())
+	} else {
+		c.JSON(http.StatusOK, topic)
+	}
+
+}
+
 func DelTopic(c *gin.Context) {
 	c.String(http.StatusOK, "删除帖子成功!")
 }
