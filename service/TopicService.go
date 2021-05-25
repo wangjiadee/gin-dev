@@ -25,6 +25,13 @@ type TopicQuery struct {
 	PageSize int    `json:"pagesize" form:"pagesize"`
 }
 
+type TopicClass struct {
+	ClassId     int `gorm:"primaryKey"`
+	ClassName   string
+	ClassRemark string
+	ClassType   string `gorm:"column:classtype"`
+}
+
 // CreateTopic: Temporary creation of entity function
 // func CreateTopic(id int, title string, stitle string, ip string, score int) Topic {
 // 	return Topic{id, title, stitle, ip, score}
