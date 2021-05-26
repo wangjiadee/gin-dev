@@ -1,17 +1,21 @@
 package service
 
+import (
+	"time"
+)
+
 // golang 内置验证器
 // github_docs: https://pkg.go.dev/github.com/go-playground/validator/v10
 //
 
 type Topic struct {
-	TopicID         int    `form:"id" json:"id"`
-	TopicTitle      string `form:"title" json:"title" binding:"min=4,max=20"`
-	TopicShortTitle string `form:"stitle" json:"stitle" binding:"required,nefield=TopicTitle"`
-	UserIP          string `form:"ip" json:"ip" binding:"ipv4"`
-	TopicScore      int    `form:"score" json:"score" binding:"omitempty,gt=5"`
-	TopicUrl        string `form:"url" json:"url" binding:"omitempty,abc"` //绑定自定义的topicurl验证器
-
+	TopicID         int       `json:"id" gorm:"PRIMARY_KEY"`
+	TopicTitle      string    `json:"title" binding:"min=4,max=20"`
+	TopicShortTitle string    `json:"stitle" binding:"required,nefield=TopicTitle"`
+	UserIP          string    `json:"ip" binding:"ipv4"`
+	TopicScore      int       `json:"score" binding:"omitempty,gt=5"`
+	TopicUrl        string    `json:"url" binding:"omitempty,abc"` //绑定自定义的topicurl验证器
+	TopicDate       time.Time `json:"date" binding:"required"`
 }
 
 type Topics struct {

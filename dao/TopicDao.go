@@ -1,10 +1,11 @@
 package dao
 
 import (
+	"gin-dev/db"
 	"gin-dev/service"
-	"net/http"
-
 	"github.com/gin-gonic/gin"
+
+	"net/http"
 )
 
 func MustLogin() gin.HandlerFunc {
@@ -19,10 +20,17 @@ func MustLogin() gin.HandlerFunc {
 }
 
 //GetTopicDetail: Past corresponding posts by id
-// func GetTopicDetail(c *gin.Context) {
-// 	// c.String(http.StatusOK, "获取到的ID为%s", c.Param("topic_id"))
-// 	c.JSON(http.StatusOK, service.CreateTopic(2019, "帖子标题", "sdds", "172.0.0.1", 7))
-// }
+func GetTopicDetail(c *gin.Context) {
+	// dsn := "root:12345678@tcp(192.168.230.150:3306)/gin?charset=utf8mb4&parseTime=True&loc=Local"
+	// db, err := gorm.Open(mysql.Open(dsn), &gorm.Config{})
+	// if err != nil {
+	// 	fmt.Println("[ERROR:] Parameter error", err.Error())
+	// }
+	tid := c.Param("topic_id")
+	topics := service.Topic{}
+	db.DB.Find(&topics, tid)
+	c.JSON(http.StatusOK, topics)
+}
 
 func NewTopic(c *gin.Context) {
 	topic := service.Topic{}
