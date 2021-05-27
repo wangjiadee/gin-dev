@@ -1,0 +1,13 @@
+{
+    "app_name":"cloudrestaurant",
+    "app_mode":"debug",
+    "app_host":"192.168.230.150",
+    "app_port":"8090",
+    "sms":{
+        "sign_name":"messageTest",
+        "template_code":"SMS_213692148",
+        "app_key":"LTAI5tHFzWiGMB23wmbQ3CJu",
+        "app_secret":"F15tTVwhyhriZ3AZV18Ukf2vliZR5X",
+        "region_id":"cn-hangzhou"
+    }
+}
